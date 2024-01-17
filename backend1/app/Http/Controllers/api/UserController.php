@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Album; // Perlu mengimport model Album
+use App\Models\User; // Perlu mengimport model User
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AlbumController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        $albums = Album::all();
-        if ($albums->count() > 0) {
+        $user = User::all();
+        if ($user->count() > 0) {
             return response()->json([
                 'status' => 200,
-                'albums' => $albums // Menggunakan variable $albums bukan $album
+                'user' => $user // Menggunakan variable $user bukan $user
             ], 200);
         } else {
             return response()->json([
@@ -28,10 +28,11 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'NamaAlbum' => 'required|string|max:191',
-            'Deskripsi' => 'required|string|max:191',
-            'TanggalDibuat' => 'required|date',
-            'id_user' => 'required|string|max:191',
+            'Username' => 'required|string|max:191',
+            'Password' => 'required|string|max:191',
+            'Email' => 'required|string|max:191',
+            'NamaLengkap' => 'required|string|max:191',
+            'Alamat' => 'required|string|max:191',
         ]);
 
         if ($validator->fails()) {
@@ -40,18 +41,19 @@ class AlbumController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         } else {
-            $album = Album::create([
-                'NamaAlbum' => $request->input('NamaAlbum'),
-                'Deskripsi' => $request->input('Deskripsi'),
-                'TanggalDibuat' => $request->input('TanggalDibuat'),
-                'id_user' => $request->input('id_user'),
+            $user = User::create([
+                'Username' => $request->input('Username'),
+                'Password' => $request->input('Password'),
+                'Email' => $request->input('Email'),
+                'NamaLengkap' => $request->input('NamaLengkap'),
+                'Alamat' => $request->input('Alamat'),
             ]);
 
-            if ($album) {
+            if ($user) {
                 return response()->json([
                     'status' => 201, // Ubah status ke 201 (Created)
                     'message' => 'Data telah ditambahkan',
-                    'album' => $album, // Sertakan data album yang baru ditambahkan
+                    'user' => $user, // Sertakan data User yang baru ditambahkan
                 ], 201);
             } else {
                 return response()->json([
@@ -62,14 +64,14 @@ class AlbumController extends Controller
         }
     }
 
-    public function show($AlbumID)
+    public function show($id_user)
     {
-        $album = Album::find($AlbumID);
+        $user = User::find($id_user);
 
-        if ($album) {
+        if ($user) {
             return response()->json([
                 'status' => 200,
-                'album' => $album,
+                'user' => $user,
             ], 200);
         } else {
             return response()->json([
@@ -79,14 +81,14 @@ class AlbumController extends Controller
         }
     }
 
-    public function edit($AlbumID)
+    public function edit($id_user)
     {
-        $album = Album::find($AlbumID);
+        $user = User::find($id_user);
 
-        if ($album) {
+        if ($user) {
             return response()->json([
                 'status' => 200,
-                'album' => $album,
+                'user' => $user,
             ], 200);
         } else {
             return response()->json([
@@ -96,11 +98,14 @@ class AlbumController extends Controller
         }
     }
 
-    public function update(Request $request, int $AlbumID)
+    public function update(Request $request, int $id_user)
     {
     $validator = Validator::make($request->all(), [
-        'NamaAlbum' => 'required|string|max:191',
-        'Deskripsi' => 'required|string|max:191',
+        'Username' => 'required|string|max:191',
+        'Password' => 'required|string|max:191',
+        'Email' => 'required|string|max:191',
+        'NamaLengkap' => 'required|string|max:191',
+        'Alamat' => 'required|string|max:191',
     ]);
 
     if ($validator->fails()) {
@@ -109,18 +114,20 @@ class AlbumController extends Controller
             'errors' => $validator->errors()
         ], 422);
     } else {
-        $album = Album::find($AlbumID);
+        $user = User::find($id_user);
 
-        if ($album) {
-            $album->update([
-                'NamaAlbum' => $request->input('NamaAlbum'),
-                'Deskripsi' => $request->input('Deskripsi'),
-                // Tetap biarkan 'TanggalDibuat' dan 'id_user' tidak termasuk di sini
+        if ($user) {
+            $user->update([
+                'Username' => $request->input('Username'),
+                'Password' => $request->input('Password'),
+                'Email' => $request->input('Email'),
+                'NamaLengkap' => $request->input('NamaLengkap'),
+                'Alamat' => $request->input('Alamat')
             ]);
             return response()->json([
                 'status' => 201,
                 'message' => 'Data telah diedit',
-                'album' => $album,
+                'user' => $user,
             ], 201);
         } else {
             return response()->json([
@@ -131,12 +138,12 @@ class AlbumController extends Controller
     }
     }
 
-    public function destroy($AlbumID)
+    public function destroy($id_user)
     {
-        $album = Album::find($AlbumID);
+        $user = User::find($id_user);
 
-        if ($album) {
-            $album->delete();
+        if ($user) {
+            $user->delete();
         }else {
             return response()->json([
                 'status' => 404,

@@ -34,9 +34,7 @@ function Albumedit() {
     setLoading(true);
     const data = {
       NamaAlbum: albums.NamaAlbum,
-      Deskripsi: albums.Deskripsi,
-      TanggalDibuat: albums.TanggalDibuat,
-      id_user: albums.id_user,
+      Deskripsi: albums.Deskripsi
     };
   
     axios.put(`http://localhost:8000/api/album/${AlbumID}`, data)
@@ -101,16 +99,6 @@ function Albumedit() {
                         <label className="form-label">Deskripsi</label>
                         <input type="text" name="Deskripsi" onChange={handleInput} value={albums.Deskripsi} className="form-control" />
                         <span className="text-danger">{inputErrorList.Deskripsi}</span>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">TanggalDibuat</label>
-                        <input type="date" name="TanggalDibuat" onChange={handleInput} value={albums.TanggalDibuat} className="form-control" />
-                        <span className="text-danger">{inputErrorList.TanggalDibuat}</span>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">ID User</label>
-                        <input type="text" name="id_user" onChange={handleInput} value={albums.id_user} className="form-control" />
-                        <span className="text-danger">{inputErrorList.id_user}</span>
                     </div>
                     <div>
                         <button type="submit" className="btn btn-primary">Simpan</button>
