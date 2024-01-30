@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AlbumController;
+use App\Http\Controllers\Api\FotoController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,13 @@ Route::get('user/{id_user}', [UserController::class, 'show']);
 Route::get('user/{id_user}/edit', [UserController::class, 'edit']);
 Route::put('user/{id_user}', [UserController::class, 'update']);
 Route::delete('user/{id_user}/delete', [UserController::class, 'destroy']);
+
+Route::get('foto', [FotoController::class, 'index']);
+Route::post('foto', [FotoController::class, 'store']);
+Route::get('foto/{FotoID}', [FotoController::class, 'show']);
+Route::get('foto/{FotoID}/edit', [FotoController::class, 'edit']);
+Route::put('foto/{FotoID}', [FotoController::class, 'update']);
+Route::delete('foto/{FotoID}/delete', [FotoController::class, 'destroy']);
 
 
 
