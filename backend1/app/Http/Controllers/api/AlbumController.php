@@ -32,6 +32,8 @@ class AlbumController extends Controller
             'Deskripsi' => 'required|string|max:191',
             'TanggalDibuat' => 'required|date',
             'id_user' => 'required|string|max:191',
+            'Keterangan' => 'required|string|max:191',
+            'jenis_album' => 'required|string|max:191',
         ]);
 
         if ($validator->fails()) {
@@ -45,6 +47,8 @@ class AlbumController extends Controller
                 'Deskripsi' => $request->input('Deskripsi'),
                 'TanggalDibuat' => $request->input('TanggalDibuat'),
                 'id_user' => $request->input('id_user'),
+                'Keterangan' => $request->input('Keterangan'),
+                'jenis_album' => $request->input('jenis_album'),
             ]);
 
             if ($album) {
@@ -101,6 +105,8 @@ class AlbumController extends Controller
     $validator = Validator::make($request->all(), [
         'NamaAlbum' => 'required|string|max:191',
         'Deskripsi' => 'required|string|max:191',
+        'Keterangan' => 'required|string|max:191',
+        'jenis_album' => 'required|string|max:191',
     ]);
 
     if ($validator->fails()) {
@@ -115,6 +121,8 @@ class AlbumController extends Controller
             $album->update([
                 'NamaAlbum' => $request->input('NamaAlbum'),
                 'Deskripsi' => $request->input('Deskripsi'),
+                'Keterangan' => $request->input('Keterangan'),
+                'jenis_album' => $request->input('jenis_album'),
                 // Tetap biarkan 'TanggalDibuat' dan 'id_user' tidak termasuk di sini
             ]);
             return response()->json([

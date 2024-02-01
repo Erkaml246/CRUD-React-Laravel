@@ -56,6 +56,8 @@ function Album() {
         <td>{item.Deskripsi}</td>
         <td>{item.TanggalDibuat}</td>
         <td>{item.id_user}</td>
+        <td>{item.Keterangan}</td>
+        <td>{item.jenis_album}</td>
         <td>
           <Link to={`/albums/${item.AlbumID}/edit`} className="btn btn-success">Edit</Link>
         </td>
@@ -85,6 +87,8 @@ function Album() {
                     <th>Deskripsi</th>
                     <th>Tanggal</th>
                     <th>User</th>
+                    <th>Kategori</th>
+                    <th>jenis_album</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>

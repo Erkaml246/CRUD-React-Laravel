@@ -30,16 +30,18 @@ class FotoController extends Controller
     public function store(Request $request)
     {
         try {
+             // Validate the request
             $validator = Validator::make($request->all(), [
-                'FotoId' => 'required|integer',
+
                 'JudulFoto' => 'required|string|max:191',
                 'DeskripsiFoto' => 'required|string|max:191',
                 'TanggalUnggah' => 'required|date',
                 'LokasiFile' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'AlbumId' => 'required|integer',
-                'UserId' => 'required|integer',
+                'AlbumID' => 'required|integer',
+                'id_user' => 'required|integer',
             ]);
 
+            // Check if validation fails
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 422,
@@ -49,26 +51,27 @@ class FotoController extends Controller
 
             // Save uploaded file
             $file = $request->file('LokasiFile');
-            $namaFile = $file->getClientOriginalName();
-            $tujuan_upload = public_path('images');
-            $file->move($tujuan_upload, $namaFile);
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $tujuan_upload = public_path('upload');
+            $file->move($tujuan_upload, $fileName);
 
-            // Save data to the database
-            $input = [
-                'FotoId' => $request->FotoId,
-                'JudulFoto' => $request->JudulFoto,
-                'DeskripsiFoto' => $request->DeskripsiFoto,
-                'TanggalUnggah' => $request->TanggalUnggah,
-                'LokasiFile' => "images/$namaFile",
-                'AlbumId' => $request->AlbumId,
-                'UserId' => $request->UserId,
-            ];
+            // Create a new Foto instance
+            $foto = new Foto([
+                'JudulFoto' => $request->input('JudulFoto'),
+                'DeskripsiFoto' => $request->input('DeskripsiFoto'),
+                'TanggalUnggah' => $request->input('TanggalUnggah'),
+                'LokasiFile' => "upload/$fileName", // Ganti "images" dengan "upload"
+                'AlbumID' => $request->input('AlbumID'),
+                'id_user' => $request->input('id_user'),
+            ]);
 
-            Foto::create($input);
+            // Save the photo to the database
+            $foto->save();
 
             return response()->json([
                 'status' => 201,
                 'message' => 'Foto berhasil diupload dan data berhasil disimpan.',
+                'photo' => $foto,
             ], 201);
         } catch (\Exception $e) {
             Log::error('Error uploading file and storing data: ' . $e->getMessage());
@@ -78,8 +81,6 @@ class FotoController extends Controller
             ], 500);
         }
     }
-
-
     public function edit($FotoID)
     {
         $foto = Foto::find($FotoID);
@@ -153,6 +154,32 @@ class FotoController extends Controller
             ], 404);
         }
     }
+
+
+    public function like($fotoID)
+    {
+        $foto = Foto::find($fotoID);
+
+        if (!$foto) {
+            return response()->json(['error' => 'Foto not found'], 404);
+        }
+
+        // Check if the user has already liked the photo
+        $userHasLiked = $foto->likes()->where('id_user', auth()->id())->exists();
+
+        if ($userHasLiked) {
+            // Unlike the photo
+            $foto->likes()->where('id_user', auth()->id())->delete();
+            $likesCount = $foto->likes()->count();
+            return response()->json(['likes' => $likesCount, 'liked' => false]);
+        } else {
+            // Like the photo
+            $foto->likes()->create(['id_user' => auth()->id()]);
+            $likesCount = $foto->likes()->count();
+            return response()->json(['likes' => $likesCount, 'liked' => true]);
+        }
+    }
+
 }
 
 

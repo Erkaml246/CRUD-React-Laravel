@@ -13,6 +13,8 @@ function Albumcreate() {
         Deskripsi : '',
         TanggalDibuat : '',
         id_user : '',
+        Keterangan : '',
+        jenis_album : '',
     })
 
     const handleInput = (e) => {
@@ -29,6 +31,8 @@ function Albumcreate() {
             Deskripsi: albums.Deskripsi,
             TanggalDibuat: albums.TanggalDibuat,
             id_user: albums.id_user,
+            Keterangan: albums.Keterangan,
+            jenis_album: albums.jenis_album,
         }
 
         axios.post('http://localhost:8000/api/album', data)
@@ -89,6 +93,16 @@ function Albumcreate() {
                                     <label className="form-label">ID User</label>
                                     <input type="text" name="id_user" onChange={handleInput} value={albums.id_user} className="form-control" />
                                     <span className="text-danger">{inputErrorList.id_user}</span>
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Keterangan</label>
+                                    <input type="text" name="Keterangan" onChange={handleInput} value={albums.Keterangan} className="form-control" />
+                                    <span className="text-danger">{inputErrorList.Keterangan}</span>
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Jenis album</label>
+                                    <input type="text" name="jenis_album" onChange={handleInput} value={albums.jenis_album} className="form-control" />
+                                    <span className="text-danger">{inputErrorList.jenis_album}</span>
                                 </div>
                                 <div className="mb-3">
                                 <button type="submit" className="btn btn-primary">Simpan</button>

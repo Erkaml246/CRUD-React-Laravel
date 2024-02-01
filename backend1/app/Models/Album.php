@@ -12,7 +12,7 @@ class Album extends Model
 
     protected $table = 'album';
     protected $primaryKey = 'AlbumID';
-    protected $fillable = ['NamaAlbum', 'Deskripsi', 'TanggalDibuat', 'id_user'];
+    protected $fillable = ['NamaAlbum', 'Deskripsi', 'TanggalDibuat', 'id_user', 'Keterangan', 'jenis_album'];
 
     public $timestamps = false;
 }

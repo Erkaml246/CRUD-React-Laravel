@@ -1,18 +1,25 @@
 /* css grid foto */
 .foto-item {
-margin-top: 40px;
+  /* margin-top: 50px; */
   margin-bottom: 20px; /* Menambahkan ruang di bagian bawah setiap gambar */
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+  grid-gap: 0px;
+  padding: 10px;
+}
+
+.foto-item p{
+  padding-top: 15px;
+  font-weight: bold;
 }
 
 .foto-item img {
-  width: 90%;
+  width: 100%;
   height: auto;
-  border-radius: 8px;
-  object-fit: cover; /* Mengontrol cara gambar ditampilkan dalam elemen */
+  border-radius: 5px;
+  object-fit: cover;
 }
 
 /* css login & register */

@@ -11,13 +11,14 @@ class CreateFotoTable extends Migration
     public function up(): void
     {
         Schema::create('foto', function (Blueprint $table) {
-            $table->string('FotoID');
+            $table->id(); // Ini akan membuat kolom FotoId sebagai auto-increment
             $table->string('JudulFoto');
-            $table->string('DeskripsiFoto');
-            $table->string('TanggalUnggal');
+            $table->text('DeskripsiFoto');
+            $table->date('TanggalUnggah');
             $table->string('LokasiFile');
-            $table->string('AlbumID');
-            $table->string('id_user');
+            $table->unsignedBigInteger('AlbumID');
+            $table->unsignedBigInteger('id_user');
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
     }

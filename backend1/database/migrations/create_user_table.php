@@ -11,12 +11,12 @@ class CreateUserTable extends Migration
     public function up(): void
     {
         Schema::create('user', function (Blueprint $table) {
-            $table->string('id_user');
-            $table->string('Username');
-            $table->string('Password');
-            $table->string('Email');
+            $table->id();
+            $table->string('Username')->unique();
+            $table->string('Password'); // Menggunakan string untuk kolom password
+            $table->string('Email')->unique();
             $table->string('NamaLengkap');
-            $table->string('Alamat');
+            $table->text('Alamat');
             $table->timestamps();
         });
     }

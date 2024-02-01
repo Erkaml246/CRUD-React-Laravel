@@ -1,11 +1,11 @@
 <?php
-// database/migrations/2024_01_01_create_album_table.php
+// database/migrations/2024_01_01_000000_create_album_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlbumTable extends Migration
+class AlbumTable extends Migration
 {
     /**
      * Run the migrations.
