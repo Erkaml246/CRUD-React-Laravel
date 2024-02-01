@@ -29,8 +29,5 @@ Route::get('foto/{FotoID}/edit', [FotoController::class, 'edit']);
 Route::put('foto/{FotoID}', [FotoController::class, 'update']);
 Route::delete('foto/{FotoID}/delete', [FotoController::class, 'destroy']);
 
-Route::post('foto/{FotoID}/like', [FotoController::class, 'like']);
-
-
 
 

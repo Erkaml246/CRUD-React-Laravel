@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import axios from "axios";
-import { FaComment, FaHeart } from "react-icons/fa";
+import { FaHeart, FaComment } from "react-icons/fa";
+
 import "../style.css";
 
 const Home = () => {
@@ -34,6 +35,7 @@ const Home = () => {
       });
   };
 
+
   return (
     <div className="container" style={{ marginTop: "50px" }}>
       <ResponsiveMasonry columnsCountBreakPoints={{ 0: 1, 350: 2, 600: 3, 900: 4, 1200: 5 }}>
@@ -47,6 +49,7 @@ const Home = () => {
               </div>
               <div>
                 <FaComment/>
+
               </div>
             </div>
           ))}

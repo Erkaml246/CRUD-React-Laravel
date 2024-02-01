@@ -32,7 +32,7 @@ class FotoController extends Controller
         try {
              // Validate the request
             $validator = Validator::make($request->all(), [
-
+                
                 'JudulFoto' => 'required|string|max:191',
                 'DeskripsiFoto' => 'required|string|max:191',
                 'TanggalUnggah' => 'required|date',
@@ -154,32 +154,6 @@ class FotoController extends Controller
             ], 404);
         }
     }
-
-
-    public function like($fotoID)
-    {
-        $foto = Foto::find($fotoID);
-
-        if (!$foto) {
-            return response()->json(['error' => 'Foto not found'], 404);
-        }
-
-        // Check if the user has already liked the photo
-        $userHasLiked = $foto->likes()->where('id_user', auth()->id())->exists();
-
-        if ($userHasLiked) {
-            // Unlike the photo
-            $foto->likes()->where('id_user', auth()->id())->delete();
-            $likesCount = $foto->likes()->count();
-            return response()->json(['likes' => $likesCount, 'liked' => false]);
-        } else {
-            // Like the photo
-            $foto->likes()->create(['id_user' => auth()->id()]);
-            $likesCount = $foto->likes()->count();
-            return response()->json(['likes' => $likesCount, 'liked' => true]);
-        }
-    }
-
 }
 
 

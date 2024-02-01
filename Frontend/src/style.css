@@ -1,6 +1,5 @@
 /* css grid foto */
 .foto-item {
-  /* margin-top: 50px; */
   margin-bottom: 20px; /* Menambahkan ruang di bagian bawah setiap gambar */
   overflow: hidden;
   border-radius: 8px;
