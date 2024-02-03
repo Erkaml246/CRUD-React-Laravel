@@ -1,6 +1,6 @@
 /* css grid foto */
 .foto-item {
-  margin-bottom: 20px; /* Menambahkan ruang di bagian bawah setiap gambar */
+  margin-bottom: 10px; /* Menambahkan ruang di bagian bawah setiap gambar */
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -111,5 +111,199 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
+}
+
+/* css foto detail */
+.back-button-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.back-button {
+  color: #000;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.back-button:hover {
+  color: #555;
+}
+
+.fotodetail-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+}
+
+.photo-details {
+  display: grid;
+  padding: 30px;
+  grid-template-columns: 1fr 1fr; /* Menggunakan grid dengan dua kolom */
+  /* gap: 10px; */
+  width: 100%;
+}
+
+.foto-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.foto-box img {
+  width: 90%;
+  height: auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+.foto-box:hover img {
+  transform: scale(1.1);
+}
+
+.details-comment-box {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-container {
+  padding: 10px;
+  text-align: center;
+}
+
+.comments-container {
+  margin-top: 20px;
+}
+
+.comments-container h3{
+  font-size: 20px;
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.chat-input {
+  flex-grow: 1;
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.chat-send-btn {
+  margin-left: 8px;
+}
+
+.no-border{
+  border: none;
+}
+
+.comment-separator {
+  border: 1px solid #c7c5c5;
+  margin: 10px 0;
+}
+
+/* css footer */
+body {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: "main" "footer";
+  overflow-x: hidden;
+  background: #F5F7FA;
+  min-height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  .footer {
+    z-index: 1;
+    --footer-background: #1F4172;
+    display: grid;
+    position: relative;
+    grid-area: footer;
+    min-height: 12rem;
+    margin-top: 20%;
+      .bubbles {
+          position: absolute;
+          top:0;
+          left:0;
+          right:0;
+          height:1rem;
+          background:var(--footer-background);
+          filter:url("#blob");
+          .bubble {
+              position: absolute;
+              left:var(--position, 50%);
+              background:var(--footer-background);
+              border-radius:100%;
+              animation:bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+                  bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+              transform:translate(-50%, 100%);
+          }
+      }
+      .content {
+          z-index: 2;
+          display:grid;
+          grid-template-columns: 1fr auto;
+          grid-gap: 4rem;
+          padding:2rem;
+          background:var(--footer-background);
+          a, p {
+              color:#F5F7FA;
+              text-decoration:none;
+          }
+          b {
+              color:white;
+          }
+          p {
+              margin:0;
+              font-size:.75rem;
+          }
+          >div {
+              display:flex;
+              flex-direction:column;
+              justify-content: center;
+              >div {
+                  margin:0.25rem 0;
+                  >* {
+                      margin-right:.5rem;
+                  }
+              }
+              .image {
+                  align-self: center;
+                  width:2rem;
+                  height:2rem;
+                  margin:0.25rem 0;
+                  background-size: cover;
+                  background-position: center;
+              }
+          }
+      }
+  }
+}
+
+@keyframes bubble-size {
+  0%, 85% {
+      width:var(--size, 3rem);
+      height:var(--size, 4rem);
+  }
+  100% {
+      width:0rem;
+      height:0rem;
+  }
+}
+@keyframes bubble-move {
+  0% {
+      bottom:-4rem;
+  }
+  100% {
+      bottom:var(--distance, 10rem);
+  }
 }
 

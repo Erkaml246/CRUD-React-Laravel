@@ -6,6 +6,8 @@ import Albumcreate from '../pages/Albumcreate.js';
 import Albumedit from '../pages/Albumedit.js';
 import Foto from '../pages/Foto.js';
 import Fotocreate from '../pages/Fotocreate.js';
+import Fotoedit from '../pages/Fotoedit.js';
+import Fotodetail from '../pages/Fotodetail.js';
 import User from '../pages/User.js';
 import Usercreate from '../pages/Usercreate.js';
 import Useredit from '../pages/Useredit.js';
@@ -24,6 +26,8 @@ function Myrouter() {
             <Route path='/albums/:AlbumID/edit' element={<Albumedit />}/>
             <Route path='fotos' element={<Foto />}/>
             <Route path='/fotos/create' element={<Fotocreate />}/>
+            <Route path='/fotos/:FotoID/edit' element={<Fotoedit />}/>
+            <Route path='/fotos/:FotoID' element={<Fotodetail />} />
             <Route path='/users' element={<User />}/>
             <Route path='/users/create' element={<Usercreate />}/>
             <Route path='/users/:id_user/edit' element={<Useredit />}/>
